@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>جمعية عائلية, مشترك</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/theme_subscriber.css" />
+</head>
+<body class="theme_subscriber">
+  <header class="topbar">
+    <nav class="nav">
+      <a class="navlink" href="visitor.html">واجهة الزوار</a>
+      <a class="navlink active" href="subscriber.html"><span id="navSubscriberLabel">المشترك</span></a>
+      <div class="brand">جمعية عائلية</div>
+      <a class="navlink" href="#contact">صفحة التواصل</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="authCard" class="card hidden">
+      <h1>دخول المشترك</h1>
+
+      <div class="tabs">
+        <button class="tabbtn active" data-tab="new">مشترك جديد</button>
+        <button class="tabbtn" data-tab="existing">مشترك سابق</button>
+      </div>
+
+      <div id="tabNew" class="tabcontent">
+        <div class="form">
+          <label>الاسم</label>
+          <input id="newName" type="text" autocomplete="name" placeholder="اسم المشترك" />
+          <label>رقم الجوال</label>
+          <input id="newMobile" type="tel" inputmode="numeric" placeholder="05xxxxxxxx" />
+          <button id="btnRegister" class="btn">تسجيل دخول</button>
+          <div id="registerResult" class="notice hidden"></div>
+          <div id="pinBox" class="pinbox hidden">
+            <div class="pinRow">
+              <div>
+                <div class="muted small">رمز الدخول PIN (احتفظ به)</div>
+                <div id="pinValue" class="pin"></div>
+              </div>
+              <button id="btnCopyPin" class="btn small">نسخ الرمز</button>
+            </div>
+            <div class="notice warn">الرمز هو الوسيلة الوحيدة للدخول مستقبلاً, احتفظ به في مكان آمن.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tabExisting" class="tabcontent hidden">
+        <div class="form">
+          <label>رمز التشفير PIN</label>
+          <input id="loginPin" type="tel" inputmode="numeric" placeholder="6 أرقام" />
+          <button id="btnLogin" class="btn">دخول</button>
+          <div id="loginResult" class="notice hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="subscriberDashboard" class="card hidden">
+      <div class="sectionTitle">
+        <h2 id="subscriberTitle">بيانات المشترك</h2>
+        <button id="btnLogout" class="btn small">خروج</button>
+      </div>
+      <div id="subscriberInfo" class="gridInfo"></div>
+
+      <div id="dashNotice" class="notice hidden" style="margin-top:12px"></div>
+
+      <hr class="sep" />
+
+      <div class="sectionTitle">
+        <h2>الجمعيات</h2>
+        <button id="btnReloadDashboard" class="btn small">تحديث</button>
+      </div>
+
+      <div id="newAssociationCard" class="card mini hidden"></div>
+
+      <div id="subscriberAssociations" class="cards"></div>
+      <div id="subscriberEmpty" class="muted">لا توجد جمعيات مرتبطة بحسابك.</div>
+
+      <hr class="sep" />
+
+      <div class="sectionTitle">
+        <h2>تعديل رقم الجوال</h2>
+      </div>
+      <div class="form inline">
+        <input id="editMobile" type="tel" inputmode="numeric" placeholder="05xxxxxxxx" />
+        <button id="btnUpdateMobile" class="btn">حفظ</button>
+      </div>
+      <div id="mobileResult" class="notice hidden"></div>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>صفحة التواصل</h2>
+      <p class="muted">ضع بيانات التواصل هنا لاحقاً.</p>
+    </section>
+  </main>
+
+  <script src="js/config.js?v=20260108_1"></script>
+  <script src="js/util.js?v=20260108_1"></script>
+  <script src="js/api.js?v=20260108_1"></script>
+  <script src="js/auth.js?v=20260108_1"></script>
+  <script src="js/subscriber.js?v=20260108_1"></script>
+</body>
+</html>

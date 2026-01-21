@@ -1,0 +1,7 @@
+:root{
+  --bg:#0b1020;
+  --panel:#121a33;
+  --accent:#7aa7ff;
+}
+body.theme_visitor{background: linear-gradient(180deg, #0b1020 0%, #0f1a33 100%)}
+body.theme_visitor .topbar{background: rgba(10,14,28,.72)}

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة المدير</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/theme_admin.css" />
+</head>
+<body class="theme-admin">
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="link" href="index.html">الرئيسية</a>
+    </div>
+    <div class="topbar-title">لوحة المدير</div>
+    <div class="topbar-right">
+      <button id="btnLogout" class="btn btn-ghost">خروج</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="viewHome" class="view">
+      <h2 class="h2">الصفحات</h2>
+      <div class="grid">
+        <button class="card card-btn" data-nav="subscribers">
+          <div class="card-title">المشتركين</div>
+          <div class="card-sub">عرض وتعديل الجوال, الرمز, PIN</div>
+        </button>
+
+        <button class="card card-btn" data-nav="associations">
+          <div class="card-title">الجمعيات</div>
+          <div class="card-sub">إنشاء جمعية, عرض الجمعيات, تفاصيل كل جمعية</div>
+        </button>
+
+        <button class="card card-btn" data-nav="devices">
+          <div class="card-title">اعتماد الأجهزة</div>
+          <div class="card-sub">طلبات الأجهزة والموافقة أو الرفض</div>
+        </button>
+      </div>
+    </section>
+
+    <section id="viewSubscribers" class="view hidden">
+      <div class="view-head">
+        <button class="btn btn-ghost" data-nav="home">رجوع</button>
+        <h2 class="h2">المشتركين</h2>
+        <div class="spacer"></div>
+        <button id="btnRefreshSubs" class="btn">تحديث</button>
+      </div>
+
+      <div id="subsList" class="stack"></div>
+    </section>
+
+    <section id="viewAssociations" class="view hidden">
+      <div class="view-head">
+        <button class="btn btn-ghost" data-nav="home">رجوع</button>
+        <h2 class="h2">الجمعيات</h2>
+        <div class="spacer"></div>
+        <button id="btnRefreshAssoc" class="btn">تحديث</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">إنشاء جمعية جديدة</div>
+        <div class="form-grid">
+          <label class="field">
+            <span>اسم الجمعية</span>
+            <input id="assocName" class="input" type="text" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>تاريخ البداية</span>
+            <input id="assocStart" class="input" type="date" />
+          </label>
+        </div>
+        <div class="actions">
+          <button id="btnCreateAssoc" class="btn">إنشاء</button>
+          <div id="createAssocMsg" class="msg"></div>
+        </div>
+      </div>
+
+      <div id="assocList" class="grid"></div>
+    </section>
+
+    <section id="viewAssocDetail" class="view hidden">
+      <div class="view-head">
+        <button class="btn btn-ghost" data-nav="associations">رجوع</button>
+        <h2 class="h2">تفاصيل الجمعية</h2>
+        <div class="spacer"></div>
+        <button id="btnRefreshAssocDetail" class="btn">تحديث</button>
+      </div>
+
+      <div id="assocDetailCard" class="card"></div>
+
+      <div class="card">
+        <div class="card-title">المشتركين في الجمعية</div>
+        <div id="assocMembers" class="table-wrap"></div>
+        <div id="assocMembersSummary" class="summary"></div>
+      </div>
+    </section>
+
+    <section id="viewCollection" class="view hidden">
+      <div class="view-head">
+        <button id="btnBackFromCollection" class="btn btn-ghost">رجوع</button>
+        <h2 class="h2">التحصيل</h2>
+        <div class="spacer"></div>
+        <button id="btnRefreshCollection" class="btn">تحديث</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">بيانات التحصيل</div>
+        <div id="collectionMeta" class="meta"></div>
+	        <div class="card-title card-title-sm">اختر الشهر</div>
+	        <div id="collectionMonthsGrid" class="months-grid"></div>
+        <div id="collectionSummary" class="summary"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">المشتركين</div>
+        <div id="collectionTable" class="table-wrap"></div>
+      </div>
+    </section>
+
+    <section id="viewDevices" class="view hidden">
+      <div class="view-head">
+        <button class="btn btn-ghost" data-nav="home">رجوع</button>
+        <h2 class="h2">اعتماد الأجهزة</h2>
+        <div class="spacer"></div>
+        <button id="btnRefreshDev" class="btn">تحديث</button>
+      </div>
+
+      <div id="devReqList" class="stack"></div>
+    </section>
+
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

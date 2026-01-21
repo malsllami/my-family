@@ -1,0 +1,10 @@
+:root{
+  --bg:#062026;
+  --panel:#0b2b33;
+  --accent:#37c2d1;
+}
+body.theme_subscriber{background: linear-gradient(180deg, #062026 0%, #0b2b33 100%)}
+body.theme_subscriber .topbar{background: rgba(5,24,28,.72)}
+body.theme_subscriber .btn{background: rgba(55,194,209,.14)}
+
+.dangerBorder{outline:2px solid #b00020;}

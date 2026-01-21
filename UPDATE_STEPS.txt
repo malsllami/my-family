@@ -1,0 +1,14 @@
+خطوات التحديث
+
+1) Google Apps Script
+- افتح مشروع Google Apps Script المرتبط بالجدول.
+- استبدل ملف Code.gs بالكامل بالمحتوى الموجود داخل apps_script/Code.gs في هذا الملف.
+- Deploy -> New deployment -> Web app
+  - Execute as: Me
+  - Who has access: Anyone
+- انسخ رابط Web App.
+
+2) الموقع (GitHub Pages)
+- استبدل ملفات الموقع بالكامل بمحتوى مجلد هذا الملف (كل شيء ما عدا مجلد apps_script).
+- افتح js/config.js وضع رابط Web App في API_BASE.
+- ارفع التحديث على GitHub.

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>جمعية عائلية, زائر</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/theme_visitor.css" />
+</head>
+<body class="theme_visitor">
+  <header class="topbar">
+    <nav class="nav">
+      <a class="navlink active" href="visitor.html">قائمة المشتركين</a>
+      <a class="navlink" href="admin_login.html">قائمة المدير</a>
+      <div class="brand">جمعية عائلية</div>
+      <a class="navlink" href="#contact">صفحة التواصل</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card hero">
+      <h1>مرحباً بكم</h1>
+      <p class="lead">
+        موقع الجمعية العائلية نرحب بالمشتركين وننوهكم بان مدة الجمعية 10 أشهر, وقيمة السهم 100 ريال,
+        والاستلام للسهم 1000 ريال, أقل سهم للاشتراك 0.5 سهم.
+      </p>
+      <div id="visitorMessage" class="notice info">للعرض فقط, التسجيل متاح من صفحة المشترك.</div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle">
+        <h2>أنواع الجمعيات</h2>
+        <button id="btnLoad" class="btn small">تحديث</button>
+      </div>
+      <div id="associations" class="cards"></div>
+      <div id="emptyAssociations" class="muted">لا توجد جمعيات بعد.</div>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>صفحة التواصل</h2>
+      <p class="muted">ضع بيانات التواصل هنا لاحقاً.</p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/visitor.js"></script>
+</body>
+</html>

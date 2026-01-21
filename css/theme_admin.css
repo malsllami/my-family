@@ -1,0 +1,149 @@
+/* ثيم المدير, أخضر هادئ مع نص أبيض */
+
+:root{
+  --bg: #061b14;
+  --panel: rgba(10, 44, 32, 0.70);
+  --panel-strong: rgba(10, 44, 32, 0.88);
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.78);
+  --border: rgba(255,255,255,0.14);
+  --shadow: rgba(0,0,0,0.38);
+  --accent: #7ee6b0;
+  --accent-2: #58caa0;
+}
+
+body.theme-admin{
+  background:
+    radial-gradient(900px 500px at 15% 15%, rgba(126,230,176,0.10), transparent 60%),
+    radial-gradient(900px 500px at 85% 25%, rgba(88,202,160,0.10), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.70)),
+    var(--bg);
+  color: var(--text);
+}
+
+/* شريط علوي أوضح */
+body.theme-admin .topbar{
+  background: rgba(0,0,0,0.40);
+  border-bottom: 1px solid var(--border);
+}
+
+body.theme-admin .navlink{
+  color: var(--muted);
+}
+
+body.theme-admin .navlink:hover,
+body.theme-admin .navlink.active{
+  color: var(--text);
+  background: rgba(255,255,255,0.10);
+}
+
+/* بطاقات واضحة */
+body.theme-admin .card,
+body.theme-admin .panel{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 26px var(--shadow);
+  color: var(--text);
+}
+
+body.theme-admin .card:hover{
+  background: var(--panel-strong);
+}
+
+body.theme-admin .card *{
+  color: inherit;
+}
+
+/* عناوين ثانوية */
+body.theme-admin .muted,
+body.theme-admin .hint,
+body.theme-admin .small{
+  color: var(--muted) !important;
+}
+
+/* مدخلات */
+body.theme-admin input,
+body.theme-admin select,
+body.theme-admin textarea{
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+body.theme-admin input::placeholder,
+body.theme-admin textarea::placeholder{
+  color: rgba(255,255,255,0.55);
+}
+
+/* أزرار */
+body.theme-admin .btn{
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.10);
+}
+
+body.theme-admin .btn:hover{
+  background: rgba(255,255,255,0.14);
+}
+
+/* جداول */
+body.theme-admin table{
+  color: var(--text);
+}
+
+body.theme-admin th{
+  color: rgba(255,255,255,0.90);
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+body.theme-admin td{
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+/* تحسين العرض على الشاشات الصغيرة */
+@media (max-width: 820px){
+  body.theme-admin .topbar{
+    padding: 10px 12px;
+  }
+  body.theme-admin .container{
+    padding: 14px 12px;
+  }
+  body.theme-admin .card{
+    padding: 14px;
+  }
+}
+
+/* ====== التحصيل: ملخص علوي ====== */
+
+body.theme-admin .stat-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+body.theme-admin .stat{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+body.theme-admin .stat-label{
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+}
+
+body.theme-admin .stat-value{
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 6px;
+  color: rgba(255,255,255,0.95);
+}
+
+@media (max-width: 900px){
+  body.theme-admin .stat-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
