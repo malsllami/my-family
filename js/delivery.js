@@ -1,30 +1,34 @@
-
-document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll("button, a");
-  let deliveryBtn = null;
-
-  buttons.forEach(b => {
-    if (b.textContent.includes("التسليم")) {
-      deliveryBtn = b;
-    }
-  });
-
-  if (!deliveryBtn) {
-    console.error("Delivery button not found");
+document.addEventListener("DOMContentLoaded", () => {
+  const deliveryTrigger = document.querySelector("[data-action='delivery']");
+  if (!deliveryTrigger) {
     return;
   }
 
-  deliveryBtn.addEventListener("click", function () {
-    loadDelivery();
-  });
+  deliveryTrigger.addEventListener("click", handleDelivery);
 });
 
-function loadDelivery() {
-  const main = document.getElementById("mainContent") || document.body;
-  main.innerHTML = `
-    <div class="card">
-      <h3>التسليم</h3>
-      <p>تم فتح واجهة التسليم</p>
-    </div>
-  `;
+function handleDelivery(event) {
+  event.preventDefault();
+
+  const main = document.getElementById("mainContent");
+  if (!main) {
+    console.error("mainContent container is missing");
+    return;
+  }
+
+  main.replaceChildren(createDeliveryCard());
+}
+
+function createDeliveryCard() {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const title = document.createElement("h3");
+  title.textContent = "التسليم";
+
+  const text = document.createElement("p");
+  text.textContent = "تم فتح واجهة التسليم";
+
+  card.append(title, text);
+  return card;
 }
