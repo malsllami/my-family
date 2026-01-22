@@ -1,143 +1,474 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>لوحة المدير</title>
-  <link rel="stylesheet" href="css/common.css" />
-  <link rel="stylesheet" href="css/theme_admin.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
+  <!-- Primary Meta Tags -->
+  <title>لوحة تحكم المدير | جمعية عائلية</title>
+  <meta name="description" content="لوحة إدارة وتحكم المدير لجمعية عائلية">
+  <meta name="keywords" content="إدارة, جمعية, مدير, مشتركين, تحصيل">
+  <meta name="author" content="جمعية عائلية">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/theme_admin.css">
+  <link rel="stylesheet" href="css/components/admin.css">
+  <link rel="stylesheet" href="css/components/card.css">
+  <link rel="stylesheet" href="css/components/table.css">
+  <link rel="stylesheet" href="css/components/button.css">
+  <link rel="stylesheet" href="css/components/form.css">
+  <link rel="stylesheet" href="css/components/nav.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload Critical JS -->
+  <link rel="preload" href="js/admin.bundle.js" as="script">
 </head>
-<body class="theme-admin">
-  <header class="topbar">
-    <div class="topbar-left">
-      <a class="link" href="index.html">الرئيسية</a>
-    </div>
-    <div class="topbar-title">لوحة المدير</div>
-    <div class="topbar-right">
-      <button id="btnLogout" class="btn btn-ghost">خروج</button>
+
+<body class="theme-admin admin-dashboard">
+  
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">تخطى إلى المحتوى الرئيسي</a>
+  
+  <!-- Admin Header -->
+  <header class="admin-header" role="banner">
+    <div class="container">
+      <div class="header-content">
+        
+        <!-- Logo and Home -->
+        <div class="header-brand">
+          <a href="index.html" class="brand-link" aria-label="العودة للصفحة الرئيسية">
+            <span class="brand-icon" aria-hidden="true">🏠</span>
+            <span class="brand-text">جمعية عائلية</span>
+          </a>
+          <span class="header-divider" aria-hidden="true">/</span>
+          <span class="header-title">لوحة المدير</span>
+        </div>
+        
+        <!-- User Info and Actions -->
+        <div class="header-actions">
+          <div class="user-profile" id="admin-profile">
+            <span class="user-avatar" aria-hidden="true">👑</span>
+            <span class="user-name" id="admin-name">المدير</span>
+          </div>
+          
+          <div class="action-buttons">
+            <button id="btnLogout" class="btn btn--ghost btn--icon" type="button" aria-label="تسجيل الخروج">
+              <span class="btn-icon" aria-hidden="true">🚪</span>
+              <span class="btn-text">خروج</span>
+            </button>
+            
+            <button id="btnRefreshAll" class="btn btn--ghost btn--icon" type="button" aria-label="تحديث جميع البيانات">
+              <span class="btn-icon" aria-hidden="true">🔄</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
-
-  <main class="container">
-
-    <section id="viewHome" class="view">
-      <h2 class="h2">الصفحات</h2>
-      <div class="grid">
-        <button class="card card-btn" data-nav="subscribers">
-          <div class="card-title">المشتركين</div>
-          <div class="card-sub">عرض وتعديل الجوال, الرمز, PIN</div>
-        </button>
-
-        <button class="card card-btn" data-nav="associations">
-          <div class="card-title">الجمعيات</div>
-          <div class="card-sub">إنشاء جمعية, عرض الجمعيات, تفاصيل كل جمعية</div>
-        </button>
-
-        <button class="card card-btn" data-nav="devices">
-          <div class="card-title">اعتماد الأجهزة</div>
-          <div class="card-sub">طلبات الأجهزة والموافقة أو الرفض</div>
-        </button>
+  
+  <!-- Main Navigation Tabs -->
+  <nav class="admin-tabs" role="navigation" aria-label="القوائم الرئيسية">
+    <div class="container">
+      <ul class="tabs-list" role="tablist">
+        <li class="tab-item" role="presentation">
+          <button class="tab-button active" id="tab-home" role="tab" aria-selected="true" 
+                  aria-controls="viewHome" data-view="home">
+            <span class="tab-icon" aria-hidden="true">📊</span>
+            <span class="tab-text">لوحة التحكم</span>
+          </button>
+        </li>
+        <li class="tab-item" role="presentation">
+          <button class="tab-button" id="tab-subscribers" role="tab" aria-selected="false"
+                  aria-controls="viewSubscribers" data-view="subscribers">
+            <span class="tab-icon" aria-hidden="true">👥</span>
+            <span class="tab-text">المشتركين</span>
+          </button>
+        </li>
+        <li class="tab-item" role="presentation">
+          <button class="tab-button" id="tab-associations" role="tab" aria-selected="false"
+                  aria-controls="viewAssociations" data-view="associations">
+            <span class="tab-icon" aria-hidden="true">🏢</span>
+            <span class="tab-text">الجمعيات</span>
+          </button>
+        </li>
+        <li class="tab-item" role="presentation">
+          <button class="tab-button" id="tab-devices" role="tab" aria-selected="false"
+                  aria-controls="viewDevices" data-view="devices">
+            <span class="tab-icon" aria-hidden="true">📱</span>
+            <span class="tab-text">الأجهزة</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Main Content Area -->
+  <main id="main-content" class="container" role="main">
+    
+    <!-- Dashboard View (Home) -->
+    <section id="viewHome" class="admin-view active" role="tabpanel" aria-labelledby="tab-home">
+      <div class="view-header">
+        <h1 class="view-title">لوحة تحكم المدير</h1>
+        <p class="view-subtitle">إدارة جميع جوانب نظام جمعية عائلية</p>
       </div>
-    </section>
-
-    <section id="viewSubscribers" class="view hidden">
-      <div class="view-head">
-        <button class="btn btn-ghost" data-nav="home">رجوع</button>
-        <h2 class="h2">المشتركين</h2>
-        <div class="spacer"></div>
-        <button id="btnRefreshSubs" class="btn">تحديث</button>
+      
+      <div class="dashboard-grid">
+        
+        <!-- Subscribers Card -->
+        <article class="dashboard-card" role="button" tabindex="0" data-view="subscribers">
+          <div class="card-icon" aria-hidden="true">👥</div>
+          <h3 class="card-title">إدارة المشتركين</h3>
+          <p class="card-description">
+            عرض وتعديل بيانات المشتركين، إدارة الجوالات، الرموز، ورقم PIN
+          </p>
+          <div class="card-stats">
+            <span class="stat-label">عدد المشتركين:</span>
+            <span class="stat-value" id="subscriber-count">جاري التحميل...</span>
+          </div>
+          <div class="card-action">
+            <span class="action-text">فتح الإدارة</span>
+            <span class="action-icon" aria-hidden="true">→</span>
+          </div>
+        </article>
+        
+        <!-- Associations Card -->
+        <article class="dashboard-card" role="button" tabindex="0" data-view="associations">
+          <div class="card-icon" aria-hidden="true">🏢</div>
+          <h3 class="card-title">إدارة الجمعيات</h3>
+          <p class="card-description">
+            إنشاء جمعيات جديدة، عرض جميع الجمعيات، إدارة تفاصيل كل جمعية
+          </p>
+          <div class="card-stats">
+            <span class="stat-label">عدد الجمعيات:</span>
+            <span class="stat-value" id="association-count">جاري التحميل...</span>
+          </div>
+          <div class="card-action">
+            <span class="action-text">فتح الإدارة</span>
+            <span class="action-icon" aria-hidden="true">→</span>
+          </div>
+        </article>
+        
+        <!-- Devices Card -->
+        <article class="dashboard-card" role="button" tabindex="0" data-view="devices">
+          <div class="card-icon" aria-hidden="true">📱</div>
+          <h3 class="card-title">اعتماد الأجهزة</h3>
+          <p class="card-description">
+            إدارة طلبات أجهزة المشتركين، الموافقة أو الرفض للأجهزة الجديدة
+          </p>
+          <div class="card-stats">
+            <span class="stat-label">طلبات قيد الانتظار:</span>
+            <span class="stat-value" id="pending-devices">جاري التحميل...</span>
+          </div>
+          <div class="card-action">
+            <span class="action-text">فتح الإدارة</span>
+            <span class="action-icon" aria-hidden="true">→</span>
+          </div>
+        </article>
+        
+        <!-- Reports Card -->
+        <article class="dashboard-card" role="button" tabindex="0" data-view="reports">
+          <div class="card-icon" aria-hidden="true">📈</div>
+          <h3 class="card-title">التقارير والإحصائيات</h3>
+          <p class="card-description">
+            تقارير مالية، إحصائيات الاستخدام، تقارير شهري وسنوي
+          </p>
+          <div class="card-stats">
+            <span class="stat-label">آخر تحديث:</span>
+            <span class="stat-value">اليوم</span>
+          </div>
+          <div class="card-action">
+            <span class="action-text">عرض التقارير</span>
+            <span class="action-icon" aria-hidden="true">→</span>
+          </div>
+        </article>
+        
+        <!-- Settings Card -->
+        <article class="dashboard-card" role="button" tabindex="0" data-view="settings">
+          <div class="card-icon" aria-hidden="true">⚙️</div>
+          <h3 class="card-title">الإعدادات العامة</h3>
+          <p class="card-description">
+            إعدادات النظام، إدارة الصلاحيات، إعدادات الاتصال والإشعارات
+          </p>
+          <div class="card-stats">
+            <span class="stat-label">النظام:</span>
+            <span class="stat-value">يعمل بكفاءة</span>
+          </div>
+          <div class="card-action">
+            <span class="action-text">فتح الإعدادات</span>
+            <span class="action-icon" aria-hidden="true">→</span>
+          </div>
+        </article>
+        
+        <!-- Quick Actions -->
+        <article class="dashboard-card card-quick-actions">
+          <h3 class="card-title">إجراءات سريعة</h3>
+          <div class="quick-actions">
+            <button class="quick-action" data-action="create-user">
+              <span class="action-icon" aria-hidden="true">➕</span>
+              <span class="action-text">مشترك جديد</span>
+            </button>
+            <button class="quick-action" data-action="backup">
+              <span class="action-icon" aria-hidden="true">💾</span>
+              <span class="action-text">نسخة احتياطية</span>
+            </button>
+            <button class="quick-action" data-action="notify">
+              <span class="action-icon" aria-hidden="true">📢</span>
+              <span class="action-text">إرسال إشعار</span>
+            </button>
+            <button class="quick-action" data-action="export">
+              <span class="action-icon" aria-hidden="true">📤</span>
+              <span class="action-text">تصدير بيانات</span>
+            </button>
+          </div>
+        </article>
       </div>
-
-      <div id="subsList" class="stack"></div>
-    </section>
-
-    <section id="viewAssociations" class="view hidden">
-      <div class="view-head">
-        <button class="btn btn-ghost" data-nav="home">رجوع</button>
-        <h2 class="h2">الجمعيات</h2>
-        <div class="spacer"></div>
-        <button id="btnRefreshAssoc" class="btn">تحديث</button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">إنشاء جمعية جديدة</div>
-        <div class="form-grid">
-          <label class="field">
-            <span>اسم الجمعية</span>
-            <input id="assocName" class="input" type="text" autocomplete="off" />
-          </label>
-          <label class="field">
-            <span>تاريخ البداية</span>
-            <input id="assocStart" class="input" type="date" />
-          </label>
+      
+      <!-- Dashboard Stats -->
+      <div class="dashboard-stats">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" aria-hidden="true">💰</div>
+            <div class="stat-content">
+              <div class="stat-value" id="total-collected">0 ر.س</div>
+              <div class="stat-label">إجمالي المتحصل</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" aria-hidden="true">📅</div>
+            <div class="stat-content">
+              <div class="stat-value" id="active-months">0</div>
+              <div class="stat-label">شهر نشط</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" aria-hidden="true">✅</div>
+            <div class="stat-content">
+              <div class="stat-value" id="completed-prefs">0</div>
+              <div class="stat-label">رغبات مكتملة</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" aria-hidden="true">⚠️</div>
+            <div class="stat-content">
+              <div class="stat-value" id="pending-actions">0</div>
+              <div class="stat-label">إجراءات معلقة</div>
+            </div>
+          </div>
         </div>
-        <div class="actions">
-          <button id="btnCreateAssoc" class="btn">إنشاء</button>
-          <div id="createAssocMsg" class="msg"></div>
-        </div>
-      </div>
-
-      <div id="assocList" class="grid"></div>
-    </section>
-
-    <section id="viewAssocDetail" class="view hidden">
-      <div class="view-head">
-        <button class="btn btn-ghost" data-nav="associations">رجوع</button>
-        <h2 class="h2">تفاصيل الجمعية</h2>
-        <div class="spacer"></div>
-        <button id="btnRefreshAssocDetail" class="btn">تحديث</button>
-      </div>
-
-      <div id="assocDetailCard" class="card"></div>
-
-      <div class="card">
-        <div class="card-title">المشتركين في الجمعية</div>
-        <div id="assocMembers" class="table-wrap"></div>
-        <div id="assocMembersSummary" class="summary"></div>
       </div>
     </section>
-
-    <section id="viewCollection" class="view hidden">
-      <div class="view-head">
-        <button id="btnBackFromCollection" class="btn btn-ghost">رجوع</button>
-        <h2 class="h2">التحصيل</h2>
-        <div class="spacer"></div>
-        <button id="btnRefreshCollection" class="btn">تحديث</button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">بيانات التحصيل</div>
-        <div id="collectionMeta" class="meta"></div>
-	        <div class="card-title card-title-sm">اختر الشهر</div>
-	        <div id="collectionMonthsGrid" class="months-grid"></div>
-        <div id="collectionSummary" class="summary"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">المشتركين</div>
-        <div id="collectionTable" class="table-wrap"></div>
+    
+    <!-- Subscribers View -->
+    <section id="viewSubscribers" class="admin-view" role="tabpanel" aria-labelledby="tab-subscribers" hidden>
+      <!-- Content will be loaded dynamically -->
+      <div class="view-loading">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>جاري تحميل بيانات المشتركين...</p>
       </div>
     </section>
-
-    <section id="viewDevices" class="view hidden">
-      <div class="view-head">
-        <button class="btn btn-ghost" data-nav="home">رجوع</button>
-        <h2 class="h2">اعتماد الأجهزة</h2>
-        <div class="spacer"></div>
-        <button id="btnRefreshDev" class="btn">تحديث</button>
+    
+    <!-- Associations View -->
+    <section id="viewAssociations" class="admin-view" role="tabpanel" aria-labelledby="tab-associations" hidden>
+      <!-- Content will be loaded dynamically -->
+      <div class="view-loading">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>جاري تحميل بيانات الجمعيات...</p>
       </div>
-
-      <div id="devReqList" class="stack"></div>
     </section>
-
+    
+    <!-- Devices View -->
+    <section id="viewDevices" class="admin-view" role="tabpanel" aria-labelledby="tab-devices" hidden>
+      <!-- Content will be loaded dynamically -->
+      <div class="view-loading">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>جاري تحميل طلبات الأجهزة...</p>
+      </div>
+    </section>
+    
+    <!-- Collection View -->
+    <section id="viewCollection" class="admin-view" role="tabpanel" hidden>
+      <!-- Dynamic content -->
+    </section>
+    
+    <!-- Association Detail View -->
+    <section id="viewAssocDetail" class="admin-view" role="tabpanel" hidden>
+      <!-- Dynamic content -->
+    </section>
+    
   </main>
-
-  <div id="toast" class="toast hidden"></div>
-
-  <script src="js/config.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/admin.js"></script>
+  
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true">
+    <!-- Toast messages will be inserted here -->
+  </div>
+  
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal" hidden role="dialog" aria-labelledby="logout-title" aria-modal="true">
+    <div class="modal-content">
+      <h3 id="logout-title" class="modal-title">تأكيد تسجيل الخروج</h3>
+      <p class="modal-message">هل أنت متأكد من تسجيل الخروج من لوحة الإدارة؟</p>
+      <div class="modal-actions">
+        <button id="logout-cancel" class="btn btn--secondary" type="button">إلغاء</button>
+        <button id="logout-confirm" class="btn btn--danger" type="button">نعم، سجل خروج</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Global Loading Overlay -->
+  <div id="global-loading" class="loading-overlay" hidden>
+    <div class="loading-content">
+      <div class="loading-spinner large"></div>
+      <p class="loading-text">جاري المعالجة...</p>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    // Admin Configuration
+    window.AdminConfig = {
+      apiBaseUrl: '/api/admin',
+      refreshInterval: 300000, // 5 minutes
+      autoSave: true,
+      features: {
+        export: true,
+        bulkActions: true,
+        realTimeUpdates: false
+      },
+      permissions: {
+        canDelete: true,
+        canCreateAssoc: true,
+        canManageDevices: true
+      }
+    };
+    
+    // Set current user info
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set admin name if available
+      const adminName = localStorage.getItem('admin_name') || 'المدير';
+      document.getElementById('admin-name').textContent = adminName;
+      
+      // Initialize current date
+      const today = new Date().toLocaleDateString('ar-SA', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Add today's date to dashboard
+      const dashboardTitle = document.querySelector('.view-subtitle');
+      if (dashboardTitle) {
+        dashboardTitle.textContent = `إدارة جميع جوانب نظام جمعية عائلية - ${today}`;
+      }
+    });
+  </script>
+  
+  <!-- Bundle all admin JS files -->
+  <script src="js/admin.bundle.js"></script>
+  
+  <!-- Initialize Admin Dashboard -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize tab functionality
+      const tabButtons = document.querySelectorAll('.tab-button');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const viewId = this.getAttribute('data-view');
+          switchView(viewId);
+        });
+      });
+      
+      // Dashboard card clicks
+      const dashboardCards = document.querySelectorAll('.dashboard-card[data-view]');
+      dashboardCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const viewId = this.getAttribute('data-view');
+          switchView(viewId);
+        });
+        
+        // Keyboard support
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const viewId = this.getAttribute('data-view');
+            switchView(viewId);
+          }
+        });
+      });
+      
+      // Logout confirmation
+      const logoutBtn = document.getElementById('btnLogout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+          const modal = document.getElementById('logout-modal');
+          modal.hidden = false;
+          document.body.style.overflow = 'hidden';
+        });
+      }
+      
+      // Modal close handlers
+      document.getElementById('logout-cancel').addEventListener('click', function() {
+        document.getElementById('logout-modal').hidden = true;
+        document.body.style.overflow = '';
+      });
+      
+      document.getElementById('logout-confirm').addEventListener('click', function() {
+        // Perform logout
+        window.location.href = 'admin_login.html';
+      });
+      
+      // Global view switching function
+      window.switchView = function(viewId) {
+        // Update tabs
+        tabButtons.forEach(btn => {
+          const isActive = btn.getAttribute('data-view') === viewId;
+          btn.setAttribute('aria-selected', isActive);
+          btn.classList.toggle('active', isActive);
+        });
+        
+        // Show selected view
+        document.querySelectorAll('.admin-view').forEach(view => {
+          const isTarget = view.id === `view${viewId.charAt(0).toUpperCase() + viewId.slice(1)}`;
+          view.hidden = !isTarget;
+          
+          if (isTarget) {
+            view.setAttribute('aria-hidden', 'false');
+            // Load view data if needed
+            loadViewData(viewId);
+          } else {
+            view.setAttribute('aria-hidden', 'true');
+          }
+        });
+        
+        // Update browser history
+        history.pushState({ view: viewId }, '', `#${viewId}`);
+      };
+      
+      // Load data for a specific view
+      function loadViewData(viewId) {
+        // This would be implemented in admin.js
+        console.log(`Loading data for view: ${viewId}`);
+      }
+      
+      // Handle browser back/forward
+      window.addEventListener('popstate', function(event) {
+        if (event.state && event.state.view) {
+          switchView(event.state.view);
+        }
+      });
+      
+      // Initialize with home view
+      const initialView = window.location.hash.replace('#', '') || 'home';
+      switchView(initialView);
+    });
+  </script>
 </body>
 </html>
