@@ -1,63 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>رغبات المشترك</title>
-  <link rel="stylesheet" href="css/common.css" />
-  <link rel="stylesheet" href="css/theme_subscriber.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
+  <!-- Primary Meta Tags -->
+  <title>إدارة الرغبات | جمعية عائلية</title>
+  <meta name="description" content="صفحة إدارة وتحديث رغبات المشتركين في جمعية عائلية">
+  <meta name="keywords" content="رغبات, مشترك, جمعية, عائلية, إدارة">
+  <meta name="author" content="جمعية عائلية">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/theme_subscriber.css">
+  <link rel="stylesheet" href="css/components/table.css">
+  <link rel="stylesheet" href="css/components/card.css">
+  <link rel="stylesheet" href="css/components/button.css">
+  
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="js/auth.js" as="script">
+  <link rel="preload" href="js/api.js" as="script">
+  
+  <!-- Fonts if any -->
 </head>
-<body class="theme_subscriber">
-  <header class="topbar">
-    <nav class="nav">
-      <a class="navlink" href="subscriber.html">رجوع</a>
-      <div class="brand">جمعية عائلية</div>
-      <a class="navlink" href="contact.html">صفحة التواصل</a>
-    </nav>
+
+<body class="theme-subscriber">
+  
+  <!-- Skip to Main Content -->
+  <a href="#main-content" class="skip-link">تخطى إلى المحتوى الرئيسي</a>
+  
+  <!-- Header -->
+  <header class="app-header" role="banner">
+    <div class="container">
+      <nav class="main-nav" aria-label="تصفح الموقع">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="subscriber.html" class="nav-link nav-link--back" aria-label="العودة للصفحة الرئيسية">
+              <span class="nav-icon" aria-hidden="true">←</span>
+              رجوع
+            </a>
+          </li>
+          
+          <li class="nav-item nav-item--brand">
+            <a href="index.html" class="nav-brand">
+              <span class="brand-icon" aria-hidden="true">🏠</span>
+              <span class="brand-text">جمعية عائلية</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link nav-link--contact">
+              <span class="nav-icon" aria-hidden="true">✉️</span>
+              التواصل
+            </a>
+          </li>
+        </ul>
+        
+        <!-- User Info (if logged in) -->
+        <div class="user-info" id="user-info" hidden>
+          <span class="user-name" id="user-name"></span>
+        </div>
+      </nav>
+    </div>
   </header>
-
-  <main class="container">
-    <div class="card">
-      <div class="sectionTitle">
-        <h2>الرغبات</h2>
-        <button id="btnReload" class="btn small">تحديث</button>
-      </div>
-
-      <div id="prefHeader" class="muted"></div>
-      <div id="prefNotice" class="notice hidden"></div>
-
-      <div id="prefSummary" class="muted" style="margin-top:10px"></div>
-      <div id="prefBlockReason" class="notice danger hidden" style="margin-top:10px"></div>
-
-      <div class="tableWrap" style="margin-top:14px">
-        <table>
-          <thead>
-            <tr>
-              <th>رقم</th>
-              <th>الشهر الميلادي</th>
-              <th>الشهر الهجري</th>
-              <th>أسهم الاستلام</th>
-              <th>نوع الرغبة</th>
-              <th>المتبقي</th>
-              <th>قيمة الاستلام</th>
-              <th>حالة الشهر</th>
-            </tr>
-          </thead>
-          <tbody id="prefTbody"></tbody>
-        </table>
-      </div>
-
-      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap">
-        <button id="btnBack" class="btn" type="button">رجوع</button>
-        <button id="btnSavePrefs" class="btn" type="button">حفظ وإرسال</button>
+  
+  <!-- Main Content -->
+  <main id="main-content" class="container" role="main">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">إدارة الرغبات الشهرية</h1>
+      <p class="page-subtitle">تعديل وتحديث رغبات الاستلام الخاصة بك</p>
+      
+      <div class="page-actions">
+        <button id="btnReload" class="btn btn--icon btn--small" type="button" aria-label="تحديث البيانات">
+          <span class="btn-icon" aria-hidden="true">🔄</span>
+          تحديث
+        </button>
       </div>
     </div>
+    
+    <!-- Info Cards -->
+    <div class="info-grid">
+      <div class="info-card info-card--header" id="prefHeader">
+        <div class="info-card__content">
+          <p class="info-text muted">جاري تحميل معلومات الرغبات...</p>
+        </div>
+      </div>
+      
+      <div class="info-card info-card--notice hidden" id="prefNotice" role="alert">
+        <div class="info-card__content">
+          <!-- Dynamic notice content -->
+        </div>
+      </div>
+      
+      <div class="info-card info-card--summary" id="prefSummary">
+        <div class="info-card__content">
+          <!-- Dynamic summary content -->
+        </div>
+      </div>
+      
+      <div class="info-card info-card--danger hidden" id="prefBlockReason" role="alert">
+        <div class="info-card__content">
+          <!-- Block reason content -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Preferences Table -->
+    <section class="preferences-section" aria-labelledby="preferences-title">
+      <div class="section-header">
+        <h2 id="preferences-title" class="section-title">جدول الرغبات الشهرية</h2>
+        <p class="section-description small muted">يمكنك تعديل الرغبات للأشهر المتاحة</p>
+      </div>
+      
+      <div class="table-container">
+        <div class="table-responsive" role="region" aria-labelledby="preferences-title" tabindex="0">
+          <table class="data-table" id="preferences-table">
+            <caption class="visually-hidden">جدول رغبات المشترك الشهرية مع تفاصيل الأسهم والقيم</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-number">#</th>
+                <th scope="col" class="col-month">الشهر الميلادي</th>
+                <th scope="col" class="col-hijri">الشهر الهجري</th>
+                <th scope="col" class="col-shares">أسهم الاستلام</th>
+                <th scope="col" class="col-type">نوع الرغبة</th>
+                <th scope="col" class="col-remaining">المتبقي</th>
+                <th scope="col" class="col-value">قيمة الاستلام</th>
+                <th scope="col" class="col-status">حالة الشهر</th>
+              </tr>
+            </thead>
+            <tbody id="prefTbody">
+              <!-- Dynamic content will be inserted here -->
+              <tr class="loading-row">
+                <td colspan="8" class="text-center">
+                  <div class="loading-indicator">
+                    <span class="loading-spinner" aria-hidden="true"></span>
+                    جاري تحميل البيانات...
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Table Legend -->
+        <div class="table-legend">
+          <div class="legend-item">
+            <span class="legend-color legend-color--available"></span>
+            <span class="legend-text">متاح للتعديل</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color legend-color--locked"></span>
+            <span class="legend-text">مغلق</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color legend-color--received"></span>
+            <span class="legend-text">تم الاستلام</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Action Buttons -->
+    <div class="action-bar">
+      <div class="action-buttons">
+        <button id="btnBack" class="btn btn--secondary" type="button">
+          <span class="btn-icon" aria-hidden="true">←</span>
+          العودة للرئيسية
+        </button>
+        
+        <button id="btnSavePrefs" class="btn btn--primary" type="button" disabled>
+          <span class="btn-icon" aria-hidden="true">💾</span>
+          حفظ التغييرات
+        </button>
+      </div>
+      
+      <div class="action-help">
+        <p class="small muted">
+          <span aria-hidden="true">💡</span>
+          <strong>ملاحظة:</strong> سيتم إرسال التغييرات تلقائيًا بعد الحفظ
+        </p>
+      </div>
+    </div>
+    
   </main>
-
-  <script src="js/config.js?v=20260108_1"></script>
-  <script src="js/util.js?v=20260108_1"></script>
-  <script src="js/api.js?v=20260108_1"></script>
-  <script src="js/auth.js?v=20260108_1"></script>
-  <script src="js/preferences.js?v=20260108_1"></script>
+  
+  <!-- Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-text small muted">
+          © جمعية عائلية <span id="current-year"></span> | 
+          <a href="privacy.html" class="footer-link">سياسة الخصوصية</a> | 
+          <a href="terms.html" class="footer-link">الشروط والأحكام</a>
+        </p>
+        <p class="footer-text small">
+          آخر تحديث: <span id="last-updated-time"></span>
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay" hidden role="alert" aria-live="assertive">
+    <div class="loading-content">
+      <div class="loading-spinner large"></div>
+      <p class="loading-text">جاري حفظ التغييرات...</p>
+    </div>
+  </div>
+  
+  <!-- Confirmation Modal -->
+  <div id="confirmation-modal" class="modal" hidden role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-content">
+      <h3 id="modal-title" class="modal-title">تأكيد الحفظ</h3>
+      <p class="modal-message" id="modal-message">هل أنت متأكد من حفظ التغييرات؟</p>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn btn--secondary" type="button">إلغاء</button>
+        <button id="modal-confirm" class="btn btn--primary" type="button">تأكيد الحفظ</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    // Config and initial state
+    window.AppConfig = {
+      version: '20260108_1',
+      apiBaseUrl: '/api',
+      userPreferences: null,
+      autoSave: false,
+      debugMode: false
+    };
+  </script>
+  
+  <!-- Bundle JS files for better performance -->
+  <script src="js/vendor.js?v=20260108_1"></script>
+  <script src="js/app.bundle.js?v=20260108_1"></script>
+  
+  <!-- Inline script for initial setup -->
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Set last updated time
+    const lastUpdated = document.getElementById('last-updated-time');
+    lastUpdated.textContent = new Date().toLocaleDateString('ar-SA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    
+    // Initialize accessibility features
+    document.addEventListener('DOMContentLoaded', function() {
+      // Focus management
+      const mainContent = document.getElementById('main-content');
+      if (window.location.hash !== '#main-content') {
+        mainContent.setAttribute('tabindex', '-1');
+        mainContent.focus();
+      }
+      
+      // Add loading state to reload button
+      const reloadBtn = document.getElementById('btnReload');
+      if (reloadBtn) {
+        reloadBtn.addEventListener('click', function() {
+          this.classList.add('loading');
+          this.setAttribute('aria-label', 'جاري التحديث...');
+          this.setAttribute('disabled', 'true');
+        });
+      }
+    });
+  </script>
 </body>
 </html>
