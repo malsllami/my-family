@@ -1,49 +1,156 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>جمعية عائلية, بوابة الدخول</title>
-  <meta name="description" content="بوابة الدخول لجمعية عائلية لإدارة المشتركين والخدمات" />
-
-  <link rel="stylesheet" href="css/common.css" />
-
-  <script src="js/delivery.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
+  <!-- Primary Meta Tags -->
+  <title>بوابة الدخول | جمعية عائلية</title>
+  <meta name="description" content="بوابة الدخول الرئيسية لجمعية عائلية لإدارة المشتركين والخدمات العائلية">
+  <meta name="keywords" content="جمعية, عائلية, بوابة دخول, إدارة, خدمات">
+  <meta name="author" content="جمعية عائلية">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="بوابة الدخول | جمعية عائلية">
+  <meta property="og:description" content="بوابة الدخول الرئيسية لجمعية عائلية">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/layout.css">
+  
+  <!-- Preconnect for external resources if any -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Scripts -->
+  <script src="js/theme-switcher.js" defer></script>
+  <script src="js/accessibility.js" defer></script>
 </head>
 
-<body class="theme_visitor">
-
-  <main class="container">
-    <section class="card">
-
-      <h1>جمعية عائلية</h1>
-      <p class="muted">اختر طريقة الدخول</p>
-
-      <nav class="grid">
-        <a class="btn" href="visitor.html" aria-label="الدخول كزائر">
-          زائر
-        </a>
-
-        <a class="btn" href="preferences.html" aria-label="الدخول كمشترك">
-          مشترك
-        </a>
-      </nav>
-
-      <hr />
-
-      <div class="admin-entry">
-        <a class="btn btn-outline" href="admin_login.html" aria-label="دخول المدير">
-          دخول الإدارة
-        </a>
+<body class="theme-visitor">
+  
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-to-main">تخطى إلى المحتوى الرئيسي</a>
+  
+  <!-- Header -->
+  <header role="banner" class="main-header">
+    <div class="header-container">
+      <div class="logo" aria-label="شعار جمعية عائلية">
+        <!-- يمكن استبدال هذا بـ SVG أو صورة -->
+        <span class="logo-text">جمعية عائلية</span>
       </div>
-
-      <footer class="muted small">
-        هذا النظام مخصص لأفراد العائلة فقط
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main-content" role="main" class="container">
+    <section class="card" aria-labelledby="main-heading">
+      
+      <!-- Page Title -->
+      <div class="page-header">
+        <h1 id="main-heading" class="page-title">
+          <span class="welcome-text">مرحباً بك في</span>
+          <span class="association-name">جمعية عائلية</span>
+        </h1>
+        <p class="page-subtitle muted">
+          اختر طريقة الدخول المناسبة لك
+        </p>
+      </div>
+      
+      <!-- User Role Selection -->
+      <div class="role-selection">
+        <h2 class="visually-hidden">طرق الدخول المتاحة</h2>
+        
+        <nav class="role-grid" aria-label="خيارات الدخول">
+          <div class="role-card">
+            <a class="role-link btn btn-primary" href="visitor.html">
+              <span class="role-icon" aria-hidden="true">👤</span>
+              <span class="role-title">الدخول كزائر</span>
+              <span class="role-desc">تصفح الخدمات العامة والمعلومات</span>
+            </a>
+          </div>
+          
+          <div class="role-card">
+            <a class="role-link btn btn-secondary" href="preferences.html">
+              <span class="role-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
+              <span class="role-title">الدخول كمشترك</span>
+              <span class="role-desc">الوصول إلى حسابك وخدمات العضوية</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+      
+      <!-- Divider -->
+      <div class="divider" role="separator" aria-hidden="true">
+        <span class="divider-text">أو</span>
+      </div>
+      
+      <!-- Admin Access -->
+      <div class="admin-access">
+        <h3 class="admin-title">دخول الإدارة</h3>
+        <p class="admin-description small muted">
+          للمسؤولين والمشرفين على النظام
+        </p>
+        <a class="btn btn-outline btn-admin" href="admin_login.html">
+          <span class="admin-icon" aria-hidden="true">🔐</span>
+          دخول لوحة التحكم
+        </a>
+        <p class="admin-warning small">
+          <span aria-hidden="true">⚠️</span>
+          <strong>ملاحظة:</strong> هذا القسم مخصص للمديرين فقط
+        </p>
+      </div>
+      
+      <!-- Footer -->
+      <footer class="page-footer" role="contentinfo">
+        <div class="footer-content">
+          <p class="footer-text muted small">
+            <span aria-hidden="true">©</span>
+            جميع الحقوق محفوظة لجمعية عائلية 
+            <span id="current-year"></span>
+          </p>
+          <p class="footer-notice small">
+            هذا النظام مخصص لأفراد العائلة والمدعوين فقط
+          </p>
+        </div>
       </footer>
-
+      
     </section>
   </main>
-
+  
+  <!-- Optional: Loading overlay -->
+  <div class="loading-overlay" aria-hidden="true" hidden>
+    <div class="loading-spinner"></div>
+  </div>
+  
+  <!-- Inline script for current year -->
+  <script>
+    // Add current year to footer
+    document.addEventListener('DOMContentLoaded', function() {
+      const yearElement = document.getElementById('current-year');
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+      
+      // Add loading state to buttons
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          if (!this.href || this.href === '#') return;
+          
+          const loadingOverlay = document.querySelector('.loading-overlay');
+          if (loadingOverlay) {
+            loadingOverlay.removeAttribute('hidden');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
